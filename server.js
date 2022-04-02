@@ -4,6 +4,9 @@ require('dotenv').config({path: "./config.env"})
 // Initialize Express
 const express = require ('express')
 
+// Initialize CORS
+const cors = require('cors')
+
 // Initialize DB
 const connectDB = require('./config/db')
 
@@ -19,8 +22,12 @@ connectDB()
 // Intialize Movies model
 const Movies = require('./models/Movies')
 
-// Create an express app
+// Create an express app and initialize cors
 const app = express()
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+    }))
 app.use(express.json())
 
 // Initialize routers

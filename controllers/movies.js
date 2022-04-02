@@ -56,7 +56,7 @@ exports.deleteMovie = async (req, res, next) => {
 //Get a movie by name
 exports.getMovie = async (req, res, next) => {
     try {
-        const movie = await Movies.find({name: req.params.movieName})
+        const movie = await Movies.findOne({name: req.params.movieName})
         res.status(200).json(movie)
     } catch (error) {
         next(error)

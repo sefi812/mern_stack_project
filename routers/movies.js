@@ -23,6 +23,6 @@ router.route('/:movieName').put(protect, updateMovie)
 router.route('/:movieName').delete(protect, deleteMovie)
 
 // GET request to /api/movies/:name
-router.route('/:movieName').put(protect, getMovie)
+router.route('/:movieName').get(protect, getMovie)
 
 module.exports = router

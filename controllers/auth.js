@@ -109,13 +109,14 @@ exports.resetpassword = async (req, res, next) => {
         .createHash("sha256")
         .update(req.params.resetToken)
         .digest("hex")
-
+        
+        console.log(resetPasswordToken)
         try {
             const user = await User.findOne({
                 resetPasswordToken,
                 resetPasswordExpire: { $gt: Date.now()}
             })
-
+            console.log(user)
             if(!user){
                 return next(new ErrorResponse("Invalid Token", 400))
             }
