@@ -5,7 +5,7 @@ const express = require('express')
 const router = express.Router()
 
 // Initialize private controller
-const { getMovies, createMovie, updateMovie } = require('../controllers/movies')
+const { getMovies, createMovie, updateMovie, deleteMovie, getMovie } = require('../controllers/movies')
 
 // Initialize protection middleware
 const { protect } = require('../middleware/auth')
@@ -18,5 +18,11 @@ router.route('/create').post(createMovie)
 
 // PUT request to /api/movies/:name
 router.route('/:movieName').put(updateMovie)
+
+// DELETE request to /api/movies/:name
+router.route('/:movieName').delete(deleteMovie)
+
+// GET request to /api/movies/:name
+router.route('/:movieName').put(getMovie)
 
 module.exports = router

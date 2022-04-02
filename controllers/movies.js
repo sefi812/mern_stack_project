@@ -44,3 +44,21 @@ exports.updateMovie = async (req, res, next) => {
 }
 
 // Delete a movie
+exports.deleteMovie = async (req, res, next) => {
+    try {
+        const deletedMovie = await Movies.findOneAndDelete({name: req.params.movieName})
+        res.status(200).json(deletedMovie)
+    } catch (error) {
+        next(error)
+    }
+}
+
+//Get a movie by name
+exports.getMovie = async (req, res, next) => {
+    try {
+        const movie = await Movies.find({name: req.params.movieName})
+        res.status(200).json(movie)
+    } catch (error) {
+        next(error)
+    }
+}
