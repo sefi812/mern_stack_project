@@ -1,9 +1,46 @@
-// Returns all movies
-exports.getMovies = (req, res, next) => {
-    
-    
-    res.status(200).json({
-        success: true,
-        data: "You have access"
-    })
+const Movies = require("../models/Movies")
+
+// Get all movies
+exports.getMovies = async (req, res, next) => {
+    try {
+        const movies = await Movies.find({})
+        res.status(200).json(movies)
+    } catch (error) {
+        next(error)
+    }
 }
+
+// Create a movie
+exports.createMovie = async (req, res, next) => {
+    const movie = req.body
+    const movies = await Movies.find({name: req.body.name})
+    if (movies.length == 0) {
+        const newMovie = new Movies(movie)
+        try {
+            await newMovie.save()
+            res.status(201).json(newMovie)
+        } catch (error) {
+            next(error)
+        }
+    }
+}
+
+// Update a movie
+exports.updateMovie = async (req, res, next) => {
+    try {
+        const movieResponse = await Movies.findOne({name: req.params.movieName})
+        if(movieResponse) {
+            const updatedMovie = await Movies.findByIdAndUpdate(movieResponse._id, {
+                    name: req.body.name,
+                    genres: req.body.genres,
+                    image: req.body.image,
+                    premiered: req.body.premiered
+                })
+                res.status(200).json(updatedMovie)         
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+// Delete a movie
