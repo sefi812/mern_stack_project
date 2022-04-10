@@ -49,9 +49,13 @@ const pushMovies = async () => {
         let parsedMovies = apiMovies.data.map(movie => {
             let name = movie.name
             let genres = movie.genres
-            let image = movie.image.original
+            let image = movie.image.medium
             let premiered = movie.premiered
-            return {name, genres, image, premiered}
+            let language = movie.language
+            let runtime = movie.averageRuntime
+            let rating = movie.rating.average
+            let summary = movie.summary
+            return {name, genres, image, premiered, language, runtime, rating, summary}
         })
         const movieInsertResponse = await Movies.insertMany(parsedMovies)
         console.log ("Movies pushed into DB")

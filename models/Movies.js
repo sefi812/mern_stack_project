@@ -19,7 +19,22 @@ const MoviesSchema = new mongoose.Schema({
           type: Date,
           required: [true, "Please enter a premiere date for the movie"]
           },
-        
+        language: {
+          type: String,
+          required: [true, "Please enter a language"]
+          },
+        runtime: {
+          type: String,
+          required: [true, "Please enter movie runtime"]
+          },  
+        rating: {
+          type: Number,
+          required: [false, "Please enter movie rating"]
+          },
+        summary: {
+          type: String,
+          required: [true, "Please enter movie summary"]
+          }, 
       })
 
       // Assigning Movies schema to a Movies model
