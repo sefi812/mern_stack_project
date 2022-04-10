@@ -1,0 +1,29 @@
+.useritem {
+    text-decoration: none;
+    width: 210px;
+    background: var(--offwhite-color);
+    box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
+      0 3px 1px 0 rgba(20, 23, 28, 0.1);
+    margin: 1rem auto;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .useritem:hover {
+    transform: scale(1.03);
+  }
+  
+  .useritem__info {
+    color: var(--dark-color);
+    text-align: center;
+  }
+  
+  .info__name {
+    font-size: 1rem;
+    padding: 5px;
+  }
+  
+  .info__rating {
+    color: var(--secondary-color);
+    padding: 5px;
+  }

@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken')
 
 // Initialize mongoose User model
-const User = require('../models/User')
+const User = require('../models/Users')
 const ErrorResponse = require('../utils/errorResponse')
 
 /* Protection function that turns a route into a protected route

@@ -32,8 +32,8 @@ app.use(express.json())
 
 // Initialize routers
 app.use('/api/auth', require('./routers/auth'))
-app.use('/api/private', require('./routers/private'))
 app.use('/api/movies', require('./routers/movies'))
+app.use('/api/users', require('./routers/users'))
 
 // Error Handler (Has to be the last middleware item)
 app.use(errorHandler)

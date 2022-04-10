@@ -10,8 +10,8 @@ const jwt = require('jsonwebtoken')
 // Initialize crypto
 const crypto = require('crypto')
 
-// Create User schema
-const UserSchema = new mongoose.Schema({
+// Create Users schema
+const UsersSchema = new mongoose.Schema({
         username: {
             type: String,
             required: [true, "Please provide a username"]
@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema({
           Otherwise, the password will be encrypted using bcrypt
 
       */
-      UserSchema.pre("save", async function(next) {
+      UsersSchema.pre("save", async function(next) {
         if(!this.isModified("password")) {
           next()
         }
@@ -59,7 +59,7 @@ const UserSchema = new mongoose.Schema({
       })
 
       // A function that compares input password with stored password
-      UserSchema.methods.matchPasswords = async function(password) {
+      UsersSchema.methods.matchPasswords = async function(password) {
         return await bcrypt.compare(password, this.password)
       }
 
@@ -67,11 +67,11 @@ const UserSchema = new mongoose.Schema({
         - id: user database ID
         - JWT_SECRET: Secret key stored in config.env
         - expiresIn: token life time, stored in config.env as JWT_EXPIRE*/
-      UserSchema.methods.getSignedToken = function () {
+      UsersSchema.methods.getSignedToken = function () {
         return jwt.sign({ id: this._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE })
       }
 
-      UserSchema.methods.getResetPasswordToken = function () {
+      UsersSchema.methods.getResetPasswordToken = function () {
         const resetToken = crypto.randomBytes(20).toString("hex")
 
         this.resetPasswordToken = crypto
@@ -84,7 +84,7 @@ const UserSchema = new mongoose.Schema({
         return resetToken
       }
 
-      // Assigning User schema to a User model
-      const User = mongoose.model("User", UserSchema)
+      // Assigning Users schema to a Users model
+      const Users = mongoose.model("Users", UsersSchema)
 
-      module.exports = User
+      module.exports = Users

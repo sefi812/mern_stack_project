@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./AdminScreen.css";
+
+// Components
+import UserItem from "../comps/UserItem";
 
 const LoginScreen = () => {
   const [error, setError] = useState("");
@@ -17,7 +19,7 @@ const LoginScreen = () => {
       };
 
       try {
-        const data = await axios.get("http://localhost:5000/api/movies", config);
+        const data = await axios.get("http://localhost:5000/api/users", config);
         setPrivateData(data.data);
       } catch (error) {
         localStorage.removeItem("authToken");
@@ -28,9 +30,18 @@ const LoginScreen = () => {
     fetchPrivateDate();
   }, []);
 
-  return (
-    <div>
-      
+  return error ? (
+    <span className="error-message">{error}</span>
+  ) : (
+    <div className="admin__list">
+      {privateData.map((item) => (
+        <UserItem
+          key={item.id}
+          username={item.username}
+          email={item.email}
+          password={item.password}
+          permissions={item.permissions}/>    
+      ))}
     </div>
   );
 };

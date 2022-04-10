@@ -2,7 +2,7 @@
 const crypto = require('crypto')
 
 // Initialize user model
-const User = require('../models/User')
+const User = require('../models/Users')
 
 // Initialize error handler
 const ErrorResponse = require('../utils/errorResponse')

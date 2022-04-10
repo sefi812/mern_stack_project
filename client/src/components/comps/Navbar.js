@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="container">
        <nav className="navbar__nav">
           <h3 className="nav__brand">
-            <Link to="/">
+            <Link to="/login">
                TV SHOW SEARCH
             </Link>
           </h3>
